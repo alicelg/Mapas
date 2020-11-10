@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PaisesService } from '../paises.service';
 
 @Component({
   selector: 'app-mapa-v2',
@@ -9,8 +10,11 @@ export class MapaV2Component implements OnInit {
 
   latitud: number;
   longitud: number;
+  paises: any[];
 
-  constructor() {
+
+  constructor(private paisesService: PaisesService) {
+
     this.latitud = 40.01243224352;
     this.longitud = -3.1212342;
   }
@@ -19,7 +23,15 @@ export class MapaV2Component implements OnInit {
     navigator.geolocation.getCurrentPosition(position => {
       this.latitud = position.coords.latitude;
       this.longitud = position.coords.longitude;
-    })
+    });
+
+    this.paisesService.getEuropean()
+      .then(response => {
+        console.log(response);
+        this.paises = response;
+
+      })
+
   }
 
   onDblClick($event) {

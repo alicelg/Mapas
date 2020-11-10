@@ -1,5 +1,7 @@
-<agm-map [latitude]="latitud" [longitude]="longitud" [zoom]="17" (mapDblClick)="onDblClick($event)">
+<agm-map [latitude]="latitud" [longitude]="longitud" [zoom]="17" [fitBounds]="true" (mapDblClick)="onDblClick($event)">
 
     <agm-marker [latitude]="latitud" [longitude]="longitud"></agm-marker>
+
+    <agm-marker *ngFor="let pais of paises" [latitude]="pais.latlng[0]" [longitude]="pais.latlng[1]"></agm-marker>
 
 </agm-map>

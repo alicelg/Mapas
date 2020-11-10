@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class PaisesService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+
+  getEuropean(): Promise<any[]> {
+    return this.httpClient.get<any[]>
+      ('https://restcountries.eu/rest/v2/region/europe').toPromise();
+  }
+
 }
