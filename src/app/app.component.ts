@@ -5,7 +5,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 /* lo ponemos para que nos autocomplete */
 
 
-declare var google; /* en algun punto de mi aplicacion he importado el google, buscala (en el index)*/
+/*  declare var google; en algun punto de mi aplicacion he importado el google, buscala (en el index)*/
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -41,9 +41,22 @@ export class AppComponent {
     /* se le da 2 parametros el donde se pinta y que opciones le pasas */
     const mapa = new google.maps.Map(this.divMap.nativeElement, mapOptions)
 
+    const icon = {
+      url: 'https://i.pinimg.com/originals/12/15/30/12153058cf7f17ac38b1342db1d30be5.gif',
+      scaledSize: new google.maps.Size(100, 100),
+
+      /* con url puedo poner también imagenes que tenga yo */
+
+    }
+
     /* marcador  */
     const marker = new google.maps.Marker({
       position: mapa.getCenter(),
+      animation: google.maps.Animation.BOUNCE,
+      icon: icon
+
+      /* BOUNCE: da saltitos
+      DROP: cae el ubicador */
     });
 
     marker.setMap(mapa);
