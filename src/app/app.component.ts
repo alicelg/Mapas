@@ -111,12 +111,44 @@ export class AppComponent {
 
   onClick() {
 
+    this.calcularRuta('plaza españa 11, madrid', 'calle  reina sofia 5, madrid')
+
     /* objetos para la creacion y pintado de la ruta */
-    const directionService = new google.maps.DirectionsService();
+    /* const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(this.mapa);
+
+    directionsService.route({
+      origin: 'plaza españa 11, madrid',
+      destination: 'calle ayala 160, madrid',
+      travelMode: google.maps.TravelMode.WALKING
+    }, result => {
+      console.log(result);
+
+      esto es para pintarlo 
+      directionsRenderer.setDirections(result);
+
+    }) */
   }
 
+  /* GENERICO */
+  calcularRuta(
+    pOrigen: string | google.maps.LatLng,
+    pDestino: string | google.maps.LatLng,
+    pModoViaje: google.maps.TravelMode = google.maps.TravelMode.DRIVING) {
 
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(this.mapa);
+
+    directionsService.route({
+      origin: pOrigen,
+      destination: pDestino,
+      travelMode: pModoViaje
+    }, result => {
+      directionsRenderer.setDirections(result);
+    })
+
+  }
 
 }
