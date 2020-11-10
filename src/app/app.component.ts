@@ -13,6 +13,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class AppComponent {
 
+  mapa: google.maps.Map;
+
   /* esto objeto (divMap) definido en el DOM lo traigo aqui para utilizarlos */
   @ViewChild('divMap') divMap: ElementRef;
 
@@ -39,7 +41,7 @@ export class AppComponent {
       mapTypeId: google.maps.MapTypeId.HYBRID
     }
     /* se le da 2 parametros el donde se pinta y que opciones le pasas */
-    const mapa = new google.maps.Map(this.divMap.nativeElement, mapOptions)
+    this.mapa = new google.maps.Map(this.divMap.nativeElement, mapOptions)
 
     const icon = {
       url: 'https://i.pinimg.com/originals/12/15/30/12153058cf7f17ac38b1342db1d30be5.gif',
@@ -51,7 +53,7 @@ export class AppComponent {
 
     /* marcador  */
     const markerPosition = new google.maps.Marker({
-      position: mapa.getCenter(),
+      position: this.mapa.getCenter(),
       animation: google.maps.Animation.BOUNCE,
       icon: icon
 
@@ -59,10 +61,10 @@ export class AppComponent {
       DROP: cae el ubicador */
     });
 
-    markerPosition.setMap(mapa);
+    markerPosition.setMap(this.mapa);
 
     /* creo un evento */
-    google.maps.event.addListener(mapa, 'click', event => {
+    google.maps.event.addListener(this.mapa, 'click', event => {
 
 
       /* console.log(event.latLng.lat()); */
@@ -72,7 +74,7 @@ export class AppComponent {
         icon: icon
       });
 
-      marker.setMap(mapa);
+      marker.setMap(this.mapa);
 
       /* al darle click se eliminar */
       google.maps.event.addListener(marker, 'mouseover', event => {
@@ -94,12 +96,25 @@ export class AppComponent {
       const place = autocomplete.getPlace();
       console.log(place);
 
-      mapa.setCenter(place.geometry.location);
+      this.mapa.setCenter(place.geometry.location);
+
+      const marker = new google.maps.Marker({
+        position: place.geometry.location,
+      })
+      marker.setMap(this.mapa);
 
 
     })
 
 
+  }
+
+  onClick() {
+
+    /* objetos para la creacion y pintado de la ruta */
+    const directionService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(this.mapa);
   }
 
 
