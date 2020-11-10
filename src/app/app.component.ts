@@ -1,6 +1,6 @@
+/// <reference path="../../node_modules/@types/googlemaps/index.d.ts" /> 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-/// <reference path="../../node_modules/@types/googlemaps/index.d.ts" /> 
 
 /* lo ponemos para que nos autocomplete */
 
@@ -43,7 +43,7 @@ export class AppComponent {
 
     const icon = {
       url: 'https://i.pinimg.com/originals/12/15/30/12153058cf7f17ac38b1342db1d30be5.gif',
-      scaledSize: new google.maps.Size(100, 100),
+      scaledSize: new google.maps.Size(50, 50),
 
       /* con url puedo poner también imagenes que tenga yo */
 
@@ -62,7 +62,9 @@ export class AppComponent {
     markerPosition.setMap(mapa);
 
     /* creo un evento */
-    google.maps.event.addDomListener(mapa, 'click', event => {
+    google.maps.event.addListener(mapa, 'click', event => {
+
+
       /* console.log(event.latLng.lat()); */
       const marker = new google.maps.Marker({
         position: event.latLng,
@@ -73,11 +75,17 @@ export class AppComponent {
       marker.setMap(mapa);
 
       /* al darle click se eliminar */
-      google.maps.event.addListener(marker, 'click', envent => {
+      google.maps.event.addListener(marker, 'mouseover', event => {
         marker.setMap(null);
       });
 
+      google.maps.event.addListener(marker, 'mouseout', event => {
+        marker.setAnimation(google.maps.Animation.BOUNCE)
+      })
+
     });
+
+    new google.maps.places.Autocomplete(document.querySelector('#inputPlaces'))
   }
 
 
