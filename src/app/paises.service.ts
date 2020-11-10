@@ -11,7 +11,7 @@ export class PaisesService {
 
   getEuropean(): Promise<any[]> {
     return this.httpClient.get<any[]>
-      ('https://restcountries.eu/rest/v2/region/europe').toPromise();
+      ('https://restcountries.eu/rest/v2/all').toPromise();
   }
 
 }
