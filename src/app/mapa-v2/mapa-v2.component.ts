@@ -11,7 +11,7 @@ export class MapaV2Component implements OnInit {
   longitud: number;
 
   constructor() {
-    this.latitud = 91.01243224352;
+    this.latitud = 41.01243224352;
     this.longitud = -3.1212342;
   }
 

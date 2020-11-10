@@ -30,7 +30,7 @@ export class AppComponent {
       /* watchPosition: es dar la ubicación cada cierto tiempo
   getCurrentPosition: es dar la ubicación todo el tiempo */
       navigator.geolocation.getCurrentPosition((position) => {
-        this.loadMap(position);
+        /*   this.loadMap(position); */
         /* esto te debe decir donde esta ubicado en console */
       })
 
