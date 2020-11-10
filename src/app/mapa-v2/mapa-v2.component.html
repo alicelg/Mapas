@@ -2,6 +2,14 @@
 
     <agm-marker [latitude]="latitud" [longitude]="longitud"></agm-marker>
 
-    <agm-marker *ngFor="let pais of paises" [latitude]="pais.latlng[0]" [longitude]="pais.latlng[1]"></agm-marker>
+    <agm-marker *ngFor="let pais of paises" [latitude]="pais.latlng[0]" [longitude]="pais.latlng[1]" [iconUrl]="{url: pais.flag,scaledSize: {
+        width:20, height:15}}">
+
+        <agm-info-window>
+            Hola desde la ventana Alice :)
+
+        </agm-info-window>
+
+    </agm-marker>
 
 </agm-map>
