@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  /* esto objeto (divMap) definido en el DOM lo traigo aqui para utilizarlos */
+  @ViewChild('divMap') divMap: ElementRef;
 
   ngOnInit() {
     /* esto se hace para saber que esta disponible este objeto en nuestro navegador */
