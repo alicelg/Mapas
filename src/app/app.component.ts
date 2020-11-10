@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-declare var google; /* en algun punto de mi aplicacion he importado el google, buscala */
+declare var google; /* en algun punto de mi aplicacion he importado el google, buscala (en el index)*/
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,13 +19,16 @@ export class AppComponent {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
         /* esto te debe decir donde esta ubicado en console */
-
       })
 
     } else {
       console.log('Actualizate !!!');
 
     }
+  }
+
+  loadMap(position) {
+
   }
 
 }
