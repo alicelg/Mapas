@@ -14,6 +14,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 export class AppComponent {
 
   mapa: google.maps.Map;
+  markers: google.maps.Marker[];
+
+
+  constructor() {
+    this.markers = [];
+  }
 
   /* esto objeto (divMap) definido en el DOM lo traigo aqui para utilizarlos */
   @ViewChild('divMap') divMap: ElementRef;
@@ -73,14 +79,16 @@ export class AppComponent {
         animation: google.maps.Animation.DROP,
         icon: icon
       });
-
+      marker.setDraggable(true);
       marker.setMap(this.mapa);
 
+      this.markers.push(marker);
+
       /* al darle click se eliminar */
-      google.maps.event.addListener(marker, 'mouseover', event => {
+      /* google.maps.event.addListener(marker, 'mouseover', event => {
         marker.setMap(null);
       });
-
+ */
       google.maps.event.addListener(marker, 'mouseout', event => {
         marker.setAnimation(google.maps.Animation.BOUNCE)
       })
@@ -96,15 +104,17 @@ export class AppComponent {
       const place = autocomplete.getPlace();
       console.log(place);
 
-      this.mapa.setCenter(place.geometry.location);
+      /* this.mapa.setCenter(place.geometry.location);
 
       const marker = new google.maps.Marker({
         position: place.geometry.location,
       })
-      marker.setMap(this.mapa);
+      marker.setMap(this.mapa); */
 
+      /* calcular una rutas desde mi posición hasta el elemento buscado */
+      this.calcularRuta(mapOptions.center, place.geometry.location);
 
-    })
+    });
 
 
   }
@@ -117,17 +127,17 @@ export class AppComponent {
     /* const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
     directionsRenderer.setMap(this.mapa);
-
+  
     directionsService.route({
       origin: 'plaza españa 11, madrid',
       destination: 'calle ayala 160, madrid',
       travelMode: google.maps.TravelMode.WALKING
     }, result => {
       console.log(result);
-
+  
       esto es para pintarlo 
       directionsRenderer.setDirections(result);
-
+  
     }) */
   }
 
@@ -149,6 +159,12 @@ export class AppComponent {
       directionsRenderer.setDirections(result);
     })
 
+  }
+
+  onClickBorrar() {
+    for (let marker of this.markers) {
+      marker.setMap(null);
+    }
   }
 
 }
