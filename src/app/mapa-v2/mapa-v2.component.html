@@ -3,11 +3,11 @@
     <agm-marker [latitude]="latitud" [longitude]="longitud"></agm-marker>
 
     <agm-marker *ngFor="let pais of paises" [latitude]="pais.latlng[0]" [longitude]="pais.latlng[1]" [iconUrl]="{url: pais.flag,scaledSize: {
-        width:20, height:15}}">
+        width:20, height:15}}" [agmFitBounds]="true">
 
         <agm-info-window>
             {{pais.translations.es}}
-
+            <!-- aqui puedo poner todo lo que quiera, botones, imagenes, detalle del país :)  -->
         </agm-info-window>
 
     </agm-marker>
