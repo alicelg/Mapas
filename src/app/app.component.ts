@@ -85,7 +85,21 @@ export class AppComponent {
 
     });
 
-    new google.maps.places.Autocomplete(document.querySelector('#inputPlaces'))
+    const autocomplete = new google.maps.places.Autocomplete(
+      document.querySelector('#inputPlaces'),
+    );
+
+    google.maps.event.addListener(autocomplete, 'place_changed', event => {
+      console.log(event);
+      const place = autocomplete.getPlace();
+      console.log(place);
+
+      mapa.setCenter(place.geometry.location);
+
+
+    })
+
+
   }
 
 
