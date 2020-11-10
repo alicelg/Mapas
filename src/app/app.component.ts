@@ -35,11 +35,18 @@ export class AppComponent {
   loadMap(position) {
     const mapOptions = {
       center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-      zoom: 18,
+      zoom: 17,
       mapTypeId: google.maps.MapTypeId.HYBRID
     }
     /* se le da 2 parametros el donde se pinta y que opciones le pasas */
-    new google.maps.Map(this.divMap.nativeElement, mapOptions)
+    const mapa = new google.maps.Map(this.divMap.nativeElement, mapOptions)
+
+    /* marcador  */
+    const marker = new google.maps.Marker({
+      position: mapa.getCenter(),
+    });
+
+    marker.setMap(mapa);
   }
 
 }
