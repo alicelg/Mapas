@@ -11,11 +11,18 @@ export class MapaV2Component implements OnInit {
   longitud: number;
 
   constructor() {
-    this.latitud = 41.01243224352;
+    this.latitud = 40.01243224352;
     this.longitud = -3.1212342;
   }
 
   ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.latitud = position.coords.latitude;
+      this.longitud = position.coords.longitude;
+    })
   }
 
+  onDblClick($event) {
+    console.log($event);
+  }
 }
