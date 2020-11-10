@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapaV2Component implements OnInit {
 
-  constructor() { }
+  latitud: number;
+  longitud: number;
+
+  constructor() {
+    this.latitud = 91.01243224352;
+    this.longitud = -3.1212342;
+  }
 
   ngOnInit(): void {
   }
