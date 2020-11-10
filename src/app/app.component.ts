@@ -50,7 +50,7 @@ export class AppComponent {
     }
 
     /* marcador  */
-    const marker = new google.maps.Marker({
+    const markerPosition = new google.maps.Marker({
       position: mapa.getCenter(),
       animation: google.maps.Animation.BOUNCE,
       icon: icon
@@ -59,7 +59,27 @@ export class AppComponent {
       DROP: cae el ubicador */
     });
 
-    marker.setMap(mapa);
+    markerPosition.setMap(mapa);
+
+    /* creo un evento */
+    google.maps.event.addDomListener(mapa, 'click', event => {
+      /* console.log(event.latLng.lat()); */
+      const marker = new google.maps.Marker({
+        position: event.latLng,
+        animation: google.maps.Animation.DROP,
+        icon: icon
+      });
+
+      marker.setMap(mapa);
+
+      /* al darle click se eliminar */
+      google.maps.event.addListener(marker, 'click', envent => {
+        marker.setMap(null);
+      });
+
+    });
   }
+
+
 
 }
